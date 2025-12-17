@@ -26,3 +26,4 @@ app.include_router(tasks.router)
 @app.get("/")
 def root():
     return {"message": "Task Management API is running"}
+
