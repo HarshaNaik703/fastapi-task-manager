@@ -29,7 +29,9 @@ def register_user(
         )
 
     # 2. Hash password
-    hashed_pw = hash_password(user_in.password)
+    print("register_user")
+    hashed_pw = user_in.password
+    print("Hashed")
 
     # 3. Create ORM user
     user = User(
@@ -57,12 +59,18 @@ def login_user(
             detail = "Invalid email"
         )
     
-    if not verify_password(user_in.password, user.hashed_password):
+    # if not verify_password(user_in.password, user.hashed_password):
+    #     raise HTTPException(
+    #         status_code = status.HTTP_401_UNAUTHORIZED,
+    #         detail = "Invalid password"
+    #     )
+    
+    if(user_in.password != user.hashed_password):
         raise HTTPException(
             status_code = status.HTTP_401_UNAUTHORIZED,
             detail = "Invalid password"
         )
-    
+
     access_token = create_access_token(
         data= {"sub":str(user.id)}
     )

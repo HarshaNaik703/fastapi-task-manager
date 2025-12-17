@@ -19,6 +19,7 @@ app.add_middleware(
 )
 
 # Include routers
+print("main.py")
 app.include_router(auth.router)
 app.include_router(tasks.router)
 
